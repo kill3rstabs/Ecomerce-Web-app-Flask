@@ -1,4 +1,4 @@
-from flask import Flask,render_template, request
+from flask import Flask,render_template, request,redirect,url_for
 from flask_mysqldb import MySQL
  
 app = Flask(__name__)
@@ -21,24 +21,27 @@ def index():
 @app.route('/shop')
 def shop():
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM USERPRODUCT')
+    cursor.execute('SELECT * FROM userproduct')
     data = cursor.fetchall()
     return render_template('shop.html',data=data)
 
 @app.route('/login', methods =["GET","POST"])
 def login():
-    # cursor = conn.cursor()
+    cursor = mysql.connection.cursor()
     if request.method == "POST":
-        email = request.form.get('email')
+        username = request.form.get('username')
         password = request.form.get('password')
-        # cursor.execute('SELECT Customer_id, c_pass FROM Customer')
-        # data = cursor.fetchall()
+        print(username,password)
+        cursor.execute('SELECT userid, password FROM user')
+        data = cursor.fetchall()
+        print(data)
         # return "Your name is" + email + "Your password is " +password
-        # for row in data:
-        #     if(row[0]==email and row[1]==password):
-        #         return redirect(url_for('/'))
-        #     else:
-        #         return redirect(url_for('shop'))
+        for i in range(0,1):
+            for j in range(0,15):
+                if(data[i][j]==username and data[i][j]==password):
+                    return redirect(url_for('/'))
+                
+        # return redirect(url_for('login'))
     return render_template('login.html')
 @app.route('/signin',methods = ["GET","POST"])
 def signin():
@@ -61,4 +64,3 @@ app.run(host='localhost', port=5000,debug=True)
 
 
 
-app.run(host='localhost', port=8080,debug=True)
