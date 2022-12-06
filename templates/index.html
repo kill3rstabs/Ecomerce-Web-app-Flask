@@ -3,35 +3,35 @@
 {% block body %}
 
 <div class="hero-slider">
-  <div class="slider-item th-fullpage hero-area" style="background-image: url(static/images/slider/slider-1.jpg);">
+  <div class="slider-item th-fullpage hero-area" style="background-image: url({{ url_for('static', filename='images/slider/slider-1.jpg') }});">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 text-center">
           <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
           <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
-          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="{{ url_for('shop') }}">Shop Now</a>
+          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="{{ url_for('shop',userid=userid) }}">Shop Now</a>
         </div>
       </div>
     </div>
   </div>
-  <div class="slider-item th-fullpage hero-area" style="background-image: url(static/images/slider/slider-3.jpg);">
+  <div class="slider-item th-fullpage hero-area" style="background-image: url({{ url_for('static', filename='images/slider/slider-3.jpg') }});">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 text-left">
           <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
           <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
-          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="{{ url_for('shop') }}">Shop Now</a>
+          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="{{ url_for('shop',userid=userid) }}">Shop Now</a>
         </div>
       </div>
     </div>
   </div>
-  <div class="slider-item th-fullpage hero-area" style="background-image: url(static/images/slider/slider-2.jpg);">
+  <div class="slider-item th-fullpage hero-area" style="background-image: url({{ url_for('static', filename='images/slider/slider-2.jpg') }});">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 text-right">
           <p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">PRODUCTS</p>
           <h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">The beauty of nature <br> is hidden in details.</h1>
-          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="{{ url_for('shop') }}">Shop Now</a>
+          <a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="{{ url_for('shop',userid=userid) }}">Shop Now</a>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
 			<div class="col-md-6">
 				<div class="category-box">
 					<a href="#!">
-						<img src="static/images/shop/category/category-1.jpg" alt="" />
+						<img src="{{ url_for('static', filename='images/shop/category/category-1.jpg') }}" alt="" />
 						<div class="content">
 							<h3>Clothes Sales</h3>
 							<p>Shop New Season Clothing</p>
@@ -58,7 +58,7 @@
 				</div>
 				<div class="category-box">
 					<a href="#!">
-						<img src="static/images/shop/category/category-2.jpg" alt="" />
+						<img src="{{ url_for('static', filename='images/shop/category/category-2.jpg') }}" alt="" />
 						<div class="content">
 							<h3>Smart Casuals</h3>
 							<p>Get Wide Range Selection</p>
@@ -69,7 +69,7 @@
 			<div class="col-md-6">
 				<div class="category-box category-box-2">
 					<a href="#!">
-						<img src="static/images/shop/category/category-3.jpg" alt="" />
+						<img src="{{ url_for('static', filename='images/shop/category/category-3.jpg') }}" alt="" />
 						<div class="content">
 							<h3>Jewellery</h3>
 							<p>Special Design Comes First</p>
@@ -95,7 +95,7 @@
 				<div class="product-item">
 					<div class="product-thumb">
 						<span class="bage">Sale</span>
-						<img class="img-responsive" src="static/images/shop/products/{{row[3]}}"alt="product-img" />
+						<img class="img-responsive" src="{{ url_for('static', filename='images/shop/products/'+row[3]) }}"alt="product-img" />
 						<div class="preview-meta">
 							<ul>
 								<li>
@@ -113,8 +113,8 @@
                       	</div>
 					</div>
 					<div class="product-content">
-						<h4><a href="{{ url_for('productSingle')}}">{{row[0]}}</a></h4>
-						<p class="price">${{row[1]}}</p>
+						<h4><a href="/productSingle/{{row[0]}}/{{userid}}">{{row[0]}}</a></h4>
+						<p class="price">${{row[4]}}</p>
 					</div>
 				</div>
 			</div>

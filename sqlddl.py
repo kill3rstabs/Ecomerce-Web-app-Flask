@@ -14,7 +14,21 @@ mysql = MySQL(app)
 def index():
 	cursor = mysql.connection.cursor()
 	
-	cursor.execute("") #using views here
+# 	cursor.execute(""" CREATE TABLE IF NOT EXISTS tasks (
+#     task_id INT AUTO_INCREMENT,
+#     title VARCHAR(255) NOT NULL,
+#     start_date DATE,
+#     due_date DATE,
+#     priority TINYINT NOT NULL DEFAULT 3,
+#     description TEXT,
+#     PRIMARY KEY (task_id)
+# );
+	rawsqls = "INSERT INTO `product` ( `sku`, `product_name`, `description`, `image`, `quantity`, `discounted_price`, `regular_price`, `product_rating`, `product_review`) VALUES ( '5009', 'husky dog', 'dog ', 'dog.jpeg', 7, 100.0, 100.0, 0.0, NULL);INSERT INTO `product` ( `sku`, `product_name`, `description`, `image`, `quantity`, `discounted_price`, `regular_price`, `product_rating`, `product_review`) VALUES ( '1111', 'nuclear bomb', 'nuclear bomb', 'bomb.jpeg', 19, 3000.0, 3000.0, 0.0, NULL);INSERT INTO `product` ( `sku`, `product_name`, `description`, `image`, `quantity`, `discounted_price`, `regular_price`, `product_rating`, `product_review`) VALUES ( '8889', 'jelly', 'jelly', 'jelly.jpeg', 13, 1.0, 1.0, 0.0, NULL);"
+
+	
+	for result in cursor.execute(rawsqls, multi=True):
+		mysql.connection.commit()
+	#sing views here
 	
 	
 	return "Hello World"

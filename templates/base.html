@@ -60,7 +60,7 @@
 			<div class="col-md-4 col-xs-12 col-sm-4">
 				<!-- Site Logo -->
 				<div class="logo text-center">
-					<a href="{{ url_for('index') }}">
+					<a href="{{ url_for('index',userid=userid) }}">
 						<!-- replace logo here -->
 						<svg width="135px" height="29px" viewBox="0 0 155 29" version="1.1" xmlns="http://www.w3.org/2000/svg"
 							xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -76,6 +76,7 @@
 					</a>
 				</div>
 			</div>
+			
 			<div class="col-md-4 col-xs-12 col-sm-4">
 				<!-- Cart -->
 				<ul class="top-menu text-right list-inline">
@@ -83,30 +84,35 @@
 						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
 								class="tf-ion-android-cart"></i>Cart</a>
 						<div class="dropdown-menu cart-dropdown">
-							
-
-							<div class="cart-summary">
-								<span>Total</span>
-								<span class="total-price">$0.00</span>
-							</div>
-							<ul class="text-center cart-buttons">
-								<li><a href="{{ url_for('cart')}}" class="btn btn-small">View Cart</a></li>
-								<li><a href="{{ url_for('checkout')}}"class="btn btn-small btn-solid-border">Checkout</a></li>
-							</ul>
+				<!-- Cart Item -->
+				{%for row in cartdata%}
+				<div class="media">
+					<a class="pull-left" href="#!">
+						<img class="media-object" src="{{ url_for('static', filename='images/shop/products/'+row[2]) }}" alt="image" />
+					</a>
+					<div class="media-body">
+						<h4 class="media-heading"><a href="#!">{{row[0]}}</a></h4>
+						<div class="cart-price">
+							<span>{{row[3]}} x</span>
+							<span>${{row[1]}}</span>
 						</div>
+						<h5><strong>${{row[1]*row[3]}}</strong></h5>
+					</div>
+					<a href="/remove/{{userid}}/{{row[0]}}" class="remove"><i class="tf-ion-close"></i></a>
+				</div><!-- / Cart Item -->
+				{%- endfor %}
 
-					</li><!-- / Cart -->
+				<div class="cart-summary">
+					<span>Total</span>
+					<span class="total-price">${{amount}}</span>
+				</div>
+				<ul class="text-center cart-buttons">
+					<li><a href="cart.html" class="btn btn-small">View Cart</a></li>
+					<li><a href="checkout.html" class="btn btn-small btn-solid-border">Checkout</a></li>
+				</ul>
+			</div>
 
-					<!-- Search -->
-					<li class="dropdown search dropdown-slide">
-						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
-								class="tf-ion-ios-search-strong"></i> Search</a>
-						<ul class="dropdown-menu search-dropdown">
-							<li>
-								<form action="post"><input type="search" class="form-control" placeholder="Search..."></form>
-							</li>
-						</ul>
-					</li><!-- / Search -->
+		</li><!-- / Cart -->
 
 					
 
@@ -139,7 +145,7 @@
 
 					<!-- Home -->
 					<li class="dropdown ">
-						<a href="{{ url_for('index') }}">Home</a>
+						<a href="{{ url_for('index',userid=userid) }}">Home</a>
 					</li><!-- / Home -->
 
 
@@ -156,9 +162,9 @@
 									<ul>
 										
 										
-										<li><a href="{{ url_for('shop') }}">Shop</a></li>
-										<li><a href="{{ url_for('checkout') }}">Checkout</a></li>
-										<li><a href="{{ url_for('cart') }}">Cart</a></li>
+										<li><a href="{{ url_for('shop',userid=userid) }}">Shop</a></li>
+										<li><a href="{{ url_for('checkout',userid=userid) }}">Checkout</a></li>
+										<li><a href="{{ url_for('cart',productid=productid,userid=userid)}}">Cart</a></li>
 										
 
 									</ul>
@@ -225,7 +231,7 @@
 						<a href="contact.html">CONTACT</a>
 					</li>
 					<li>
-						<a href="shop.html">SHOP</a>
+						<a href="{{ url_for('shop',userid=userid) }}">SHOP</a>
 					</li>
 					
 				</ul>
